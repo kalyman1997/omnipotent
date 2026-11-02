@@ -17,7 +17,8 @@ try{
     function Api([string]$Method,[string]$Route,$Body=$null){
         $params=@{Method=$Method;Uri=('https://api.github.com/'+$Route);Headers=$headers;TimeoutSec=120}
         if($null-ne $Body){$params.Body=$Body|ConvertTo-Json -Depth 10 -Compress;$params.ContentType='application/json'}
-        Invoke-RestMethod @params
+        $response=Invoke-RestMethod @params
+        foreach($item in $response){$item}
     }
     function OptionalGet([string]$Route){try{Api GET $Route}catch{if([int]$_.Exception.Response.StatusCode-eq 404){return $null};throw}}
     $account=Api GET 'user'
@@ -61,6 +62,19 @@ try{
         if($LASTEXITCODE-ne 0){throw 'No se pudo publicar el codigo. No se sobrescribe el historial remoto.'}
     }
     $release=OptionalGet "repos/$repository/releases/tags/$tag"
+    if(!$release){
+        # Draft releases are not reliably returned by the tag endpoint.
+        $candidates=@();$releasePage=1
+        do{
+            $releaseBatch=@(Api GET "repos/$repository/releases?per_page=100&page=$releasePage" | Where-Object {$null-ne $_ -and $_.id})
+            $candidates+=@($releaseBatch|Where-Object {$_.tag_name-eq $tag -and $_.draft})
+            $releasePage++
+        }while($releaseBatch.Count-eq 100)
+        $populated=@($candidates|Where-Object {@($_.assets).Count-gt 0})
+        if($populated.Count-gt 1){throw 'Hay varios borradores con archivos para esta etiqueta; no se elige automaticamente.'}
+        if($populated.Count-eq 1){$release=$populated[0]}
+        elseif($candidates.Count-gt 0){$release=$candidates|Sort-Object id -Descending|Select-Object -First 1}
+    }
     if(!$release){
         if($Mode-ne 'Stage'){throw 'No existe el borrador de release.'}
         $notes=[IO.File]::ReadAllText((Join-Path $package 'RELEASE-NOTES.txt'))
