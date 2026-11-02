@@ -1,12 +1,14 @@
-Omnipotent 1.0.1 — detección automática de la instalación
+omnipotent by kaly — 1.1.0
 
-Descarga Omnipotent.exe y ábrelo. Busca Black Ops 7 en las bibliotecas locales de Xbox, incluida la ubicación personalizada registrada en .GamingRoot.
+Descarga únicamente Omnipotent.exe.
 
-- Una instalación encontrada: selecciona la carpeta automáticamente.
-- Varias instalaciones o ninguna: conserva el botón Elegir carpeta.
-- Una selección guardada válida tiene prioridad.
-- La búsqueda se ejecuta en segundo plano; no recorre todo el disco ni modifica el juego.
+- Interfaz minimalista de 760 × 420: sin eslogan ni ilustración.
+- Pestaña Juego: detección de carpeta, Instalar, Play y progreso.
+- Pestaña Mods: Abrir trainer con un clic. Descarga verificada de unos 15 MB la primera vez; después usa la copia local, sin necesitar Python.
+- Conserva el trainer de Zombies individual v0.5 existente. Se abre en su propia ventana; un segundo clic la enfoca.
 
-Después pulsa Instalar y Play. Requiere el juego completo compatible. La primera instalación necesita internet; el cliente descarga y verifica aproximadamente 1 GB desde la release offline-1.0, que debe permanecer disponible.
+Antes de la primera partida con mods, pulsa Preparar juego dentro del trainer para instalar su script. Reinicia el juego si ya estaba abierto. Abrir el trainer no instala el script ni activa opciones automáticamente.
 
-Validación: 16 pruebas de detección, 11 autopruebas del launcher y detección correcta de la instalación real en la PC de referencia. El componente offline no cambió: sigue siendo Kronos v1.36. La primera partida en otra PC sigue pendiente; esta release se mantiene como prerelease.
+Requiere Black Ops 7 completo y compatible. El instalador offline sigue descargando aproximadamente 1 GB desde la release offline-1.0. El núcleo offline sigue siendo Kronos v1.36.
+
+Validación: vistas Juego/Mods renderizadas e inspeccionadas, pruebas de extracción y reparación del paquete, apertura mediante el botón real y reutilización de la ventana existente. Esta actualización no vuelve a validar todos los efectos del trainer en partida. La partida desde esta distribución en otra PC sigue pendiente; se conserva la marca prerelease.
