@@ -1,9 +1,12 @@
-Descarga únicamente **Omnipotent.exe**. Selecciona la carpeta del juego completo, pulsa **Instalar** y después **Play**. El resto de assets los descarga automáticamente el launcher (aproximadamente 1 GB).
+Omnipotent 1.0.1 — detección automática de la instalación
 
-- Ejecutable único de 136 KB; motor incluido y datos locales por instalación.
-- Descargas HTTPS con tamaño y SHA-256 verificados.
-- Preparación de assets, perfil local propio y servicio del controlador firmado.
-- Comprobación de la build probada antes de modificar el juego.
-- Núcleo offline Kronos v1.36; interfaz y gestión de Omnipotent.
+Descarga Omnipotent.exe y ábrelo. Busca Black Ops 7 en las bibliotecas locales de Xbox, incluida la ubicación personalizada registrada en .GamingRoot.
 
-**Prerelease para la primera prueba en otra PC.** La partida individual en Ashes of the Damned fue comprobada en la PC de referencia. La preparación portable pasó pruebas locales; aún falta confirmar una partida en la PC receptora. Requiere el juego completo compatible y permisos de administrador. No incluye partidas ni respaldos personales.
+- Una instalación encontrada: selecciona la carpeta automáticamente.
+- Varias instalaciones o ninguna: conserva el botón Elegir carpeta.
+- Una selección guardada válida tiene prioridad.
+- La búsqueda se ejecuta en segundo plano; no recorre todo el disco ni modifica el juego.
+
+Después pulsa Instalar y Play. Requiere el juego completo compatible. La primera instalación necesita internet; el cliente descarga y verifica aproximadamente 1 GB desde la release offline-1.0, que debe permanecer disponible.
+
+Validación: 16 pruebas de detección, 11 autopruebas del launcher y detección correcta de la instalación real en la PC de referencia. El componente offline no cambió: sigue siendo Kronos v1.36. La primera partida en otra PC sigue pendiente; esta release se mantiene como prerelease.

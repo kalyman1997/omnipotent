@@ -48,7 +48,7 @@ namespace Umbral {
         [DllImport("user32.dll")] static extern IntPtr SendMessage(IntPtr h,int m,IntPtr w,IntPtr l);
         readonly TextBox folder; readonly ActionButton browse,install,play;
         readonly Label status,percent; readonly LoadingBar progress; readonly ToolTip hints=new ToolTip();
-        readonly Timer folderTimer=new Timer(); bool busy,ready,loadingFolder; string activeAction="";
+        readonly Timer folderTimer=new Timer(); bool busy,ready,loadingFolder,detecting; string activeAction="";
         public Launcher(bool autoStatus){
             Text="Omnipotent"; ClientSize=new Size(880,590); FormBorderStyle=FormBorderStyle.None; MaximizeBox=false;
             StartPosition=FormStartPosition.CenterScreen; BackColor=Design.Background; ForeColor=Design.Ink; Font=new Font("Segoe UI",10);
@@ -63,13 +63,13 @@ namespace Umbral {
             percent=new Label{Location=new Point(757,508),Size=new Size(74,22),Font=new Font("Segoe UI",9,FontStyle.Bold),ForeColor=Design.Violet,TextAlign=ContentAlignment.TopRight};Controls.Add(percent);
             progress=new LoadingBar{Location=new Point(49,550),Size=new Size(782,6),AccessibleName="Progreso de instalación"};Controls.Add(progress);
             loadingFolder=true;folder.Text=LoadFolder();loadingFolder=false;
-            folderTimer.Interval=650;folderTimer.Tick+=delegate{folderTimer.Stop();if(!busy)RunAction("InspectSimple");};
+            folderTimer.Interval=650;folderTimer.Tick+=delegate{folderTimer.Stop();if(!busy&&!detecting)RunAction("InspectSimple");};
             folder.TextChanged+=delegate{if(loadingFolder)return;ready=false;UpdateButtons();status.Text="Comprobando carpeta…";folderTimer.Stop();folderTimer.Start();};
             browse.Click+=delegate{using(var dialog=new FolderBrowserDialog{Description="Selecciona la carpeta de Call of Duty o cod25",ShowNewFolderButton=false}){if(Directory.Exists(folder.Text))dialog.SelectedPath=folder.Text;if(dialog.ShowDialog(this)==DialogResult.OK)folder.Text=ResolveGameFolder(dialog.SelectedPath);}};
             install.Click+=delegate{RunAction("InstallSimple");};play.Click+=delegate{RunAction("LaunchOffline");};
             FormClosing+=delegate(object s,FormClosingEventArgs e){if(busy){e.Cancel=true;status.Text=activeAction=="LaunchOffline"?"Cierra el juego antes de salir de Omnipotent.":"Espera a que termine la operación para cerrar.";}};
             UpdateButtons();
-            Shown+=delegate{ActiveControl=install;folder.Select(0,0);if(autoStatus&&!String.IsNullOrWhiteSpace(folder.Text))RunAction("InspectSimple");};
+            Shown+=delegate{ActiveControl=install;folder.Select(0,0);if(autoStatus){if(GameDiscovery.Recognize(folder.Text)!=null)RunAction("InspectSimple");else DetectGame();}};
         }
         Button WindowButton(string text,int x){var b=new Button{Text=text,Location=new Point(x,12),Size=new Size(38,32),FlatStyle=FlatStyle.Flat,ForeColor=Design.Muted,BackColor=Design.Background,Font=new Font("Segoe UI",16),TabStop=false,AccessibleName=text=="×"?"Cerrar":"Minimizar"};b.FlatAppearance.BorderSize=0;b.FlatAppearance.MouseOverBackColor=Design.Surface;Controls.Add(b);return b;}
         protected override void OnMouseDown(MouseEventArgs e){base.OnMouseDown(e);if(e.Button==MouseButtons.Left&&e.Y<80){ReleaseCapture();SendMessage(Handle,0xA1,new IntPtr(2),IntPtr.Zero);}}
@@ -99,7 +99,21 @@ namespace Umbral {
         public static string ResolveGameFolder(string input){string path=Engine.ValidateFolder(input);foreach(string relative in new[]{"cod25",@"Content\cod25"}){string candidate=Path.Combine(path,relative);if(Directory.Exists(candidate))return candidate;}return path;}
         string LoadFolder(){try{if(File.Exists(Program.SettingsPath)){var doc=new XmlDocument();doc.XmlResolver=null;doc.Load(Program.SettingsPath);var node=doc.SelectSingleNode("/umbral/gameFolder");if(node!=null)return node.InnerText;}}catch{}return Program.DefaultGame;}
         void SaveFolder(string game){using(var w=XmlWriter.Create(Program.SettingsPath,new XmlWriterSettings{Indent=true,Encoding=Encoding.UTF8})){w.WriteStartElement("umbral");w.WriteElementString("gameFolder",game);w.WriteEndElement();}}
-        void UpdateButtons(){folder.Enabled=!busy;browse.Enabled=!busy;install.Enabled=!busy&&!String.IsNullOrWhiteSpace(folder.Text);play.Enabled=!busy&&ready;}
+        void DetectGame(){
+            string original=folder.Text;detecting=true;UpdateButtons();Progress(-1,"Buscando Black Ops 7…");
+            var worker=new BackgroundWorker();
+            worker.DoWork+=delegate(object s,DoWorkEventArgs e){e.Result=GameDiscovery.Find(GameDiscovery.SystemLibraries());};
+            worker.RunWorkerCompleted+=delegate(object s,RunWorkerCompletedEventArgs e){
+                worker.Dispose();if(IsDisposed||Disposing)return;
+                detecting=false;progress.Running=false;progress.Value=0;progress.Invalidate();percent.Text="";
+                if(folder.Text!=original){UpdateButtons();if(!String.IsNullOrWhiteSpace(folder.Text))RunAction("InspectSimple");else status.Text="Selecciona el juego para comenzar.";return;}
+                var matches=e.Error==null?(string[])e.Result:new string[0];
+                if(matches.Length==1){loadingFolder=true;folder.Text=matches[0];loadingFolder=false;UpdateButtons();RunAction("InspectSimple");}
+                else{loadingFolder=true;folder.Text="";loadingFolder=false;UpdateButtons();status.Text=matches.Length>1?"Hay varias instalaciones. Elige la carpeta que quieres usar.":"No se encontró el juego. Pulsa Elegir carpeta.";}
+            };
+            worker.RunWorkerAsync();
+        }
+        void UpdateButtons(){folder.Enabled=!busy;browse.Enabled=!busy;install.Enabled=!busy&&!detecting&&!String.IsNullOrWhiteSpace(folder.Text);play.Enabled=!busy&&!detecting&&ready;}
         void Progress(int value,string message){if(IsDisposed)return;progress.Value=value;progress.Running=true;progress.Invalidate();status.Text=message;percent.Text=value>=0?value+"%":"";}
         void RunAction(string action){
             if(busy)return;folderTimer.Stop();string game;

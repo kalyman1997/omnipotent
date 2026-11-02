@@ -12,9 +12,9 @@ using System.Xml;
 [assembly: System.Reflection.AssemblyTitle("Omnipotent 1.0")]
 [assembly: System.Reflection.AssemblyProduct("Omnipotent")]
 [assembly: System.Reflection.AssemblyDescription("Gestor híbrido: offline con Kronos y online desde Xbox")]
-[assembly: System.Reflection.AssemblyVersion("1.0.0.0")]
-[assembly: System.Reflection.AssemblyFileVersion("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersion("1.0")]
+[assembly: System.Reflection.AssemblyVersion("1.0.1.0")]
+[assembly: System.Reflection.AssemblyFileVersion("1.0.1.0")]
+[assembly: System.Reflection.AssemblyInformationalVersion("1.0.1")]
 
 namespace Umbral {
     internal sealed class EngineResult {
@@ -82,11 +82,12 @@ namespace Umbral {
     }
     internal static class Program {
         public static string Root = AppDomain.CurrentDomain.BaseDirectory;
-        public static string DefaultGame {get{return Bundle.IsEmbedded?"":@"D:\XboxGames\Call of Duty_1\Content\cod25";}}
+        public static string DefaultGame {get{return "";}}
         public static string SettingsPath { get { return Path.Combine(Bundle.IsEmbedded?Bundle.Home:Root, "settings.xml"); } }
         [STAThread] static int Main(string[] args) {
             try {
                 Root=Bundle.Prepare();
+                if(args.Length>1&&args[0]=="--detect-game") {File.WriteAllText(args[1],new JavaScriptSerializer().Serialize(GameDiscovery.Find(GameDiscovery.SystemLibraries())),Encoding.UTF8);return 0;}
                 if(args.Length>0&&args[0]=="--bundle-info") {File.WriteAllText(args[1],new JavaScriptSerializer().Serialize(new{embedded=Bundle.IsEmbedded,runtime=Root,settings=SettingsPath,defaultGame=DefaultGame}),Encoding.UTF8);return 0;}
                 if (args.Length > 0 && args[0] == "--self-test") return SelfTest(args.Length > 1 ? args[1] : Path.Combine(Root, "self-test.txt"));
                 if (args.Length > 0 && args[0] == "--diagnose") {

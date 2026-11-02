@@ -1,4 +1,4 @@
-﻿param([string]$Repository='kalyman1997/omnipotent',[string]$Tag='offline-1.0',[string]$OutputPath="$PSScriptRoot\..\Omnipotent-Compartir",[string]$ObjectStore="$PSScriptRoot\data\objects")
+param([string]$Repository='kalyman1997/omnipotent',[string]$Tag='offline-1.0',[string]$OutputPath="$PSScriptRoot\..\Omnipotent-Compartir",[string]$ObjectStore="$PSScriptRoot\data\objects")
 $ErrorActionPreference='Stop'
 if($Repository -notmatch '^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$' -or $Tag -notmatch '^[A-Za-z0-9_.-]+$'){throw 'Repositorio o tag no valido.'}
 $out=[IO.Path]::GetFullPath($OutputPath)
@@ -8,7 +8,7 @@ $assets=Join-Path $out 'release-assets';$source=Join-Path $out 'repository'
 [IO.Directory]::CreateDirectory($assets)|Out-Null
 [IO.Directory]::CreateDirectory($source)|Out-Null
 $runtime=@('Hybrid.ps1','OfflinePackage.ps1','Branding.ps1','Portable.ps1','package.manifest.txt','compatibility.json','distribution.json','assets/umbral_ready_guard_post.lua')
-$code=@('Launcher.cs','Interface.cs','Bundle.cs','launcher.manifest','build.ps1','Build-Share.ps1','Publish-GitHub.ps1','LEEME.txt','README.md','RELEASE-NOTES.txt','.gitattributes')
+$code=@('Launcher.cs','Interface.cs','Bundle.cs','GameDiscovery.cs','Build-Client.ps1','launcher.manifest','build.ps1','Build-Share.ps1','Publish-GitHub.ps1','LEEME.txt','README.md','RELEASE-NOTES.txt','.gitattributes')
 foreach($name in @($runtime)+@($code)){
     $from=Join-Path $PSScriptRoot $name;$to=Join-Path $source $name
     [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($to))|Out-Null
@@ -17,7 +17,7 @@ foreach($name in @($runtime)+@($code)){
 [ordered]@{schema=1;downloadBaseUrl="https://github.com/$Repository/releases/download/$Tag/";release=$Tag;repository=$Repository}|ConvertTo-Json|Set-Content -LiteralPath (Join-Path $source 'distribution.json') -Encoding UTF8
 [IO.File]::Copy((Join-Path $PSScriptRoot 'RELEASE-NOTES.txt'),(Join-Path $out 'RELEASE-NOTES.txt'),$false)
 $compiler=Join-Path $env:WINDIR 'Microsoft.NET\Framework64\v4.0.30319\csc.exe'
-$args=@('/nologo','/target:winexe','/platform:x64','/optimize+','/utf8output','/reference:System.Core.dll','/reference:System.Windows.Forms.dll','/reference:System.Drawing.dll','/reference:System.Xml.dll','/reference:System.Web.Extensions.dll','/reference:Microsoft.CSharp.dll',"/win32manifest:$source\launcher.manifest","/out:$assets\Omnipotent.exe","$source\Launcher.cs","$source\Interface.cs","$source\Bundle.cs")
+$args=@('/nologo','/target:winexe','/platform:x64','/optimize+','/utf8output','/reference:System.Core.dll','/reference:System.Windows.Forms.dll','/reference:System.Drawing.dll','/reference:System.Xml.dll','/reference:System.Web.Extensions.dll','/reference:Microsoft.CSharp.dll',"/win32manifest:$source\launcher.manifest","/out:$assets\Omnipotent.exe","$source\Launcher.cs","$source\Interface.cs","$source\Bundle.cs","$source\GameDiscovery.cs")
 foreach($name in $runtime){$args+=('/resource:'+(Join-Path $source $name)+',Omnipotent.Bundle.'+$name)}
 & $compiler @args
 if($LASTEXITCODE-ne 0){throw 'No se pudo compilar el launcher compartible.'}

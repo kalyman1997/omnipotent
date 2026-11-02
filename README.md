@@ -1,11 +1,11 @@
-# Omnipotent 1.0
+# Omnipotent 1.0.1
 
 Launcher ligero para preparar y abrir el modo offline de una instalación compatible de Black Ops 7 en Windows de 64 bits.
 
 ## Uso
 
-1. Descarga **Omnipotent.exe** de [Releases](https://github.com/kalyman1997/omnipotent/releases/tag/offline-1.0).
-2. Abre el ejecutable y selecciona la carpeta del juego completo (cod25, Content o su carpeta superior).
+1. Descarga **Omnipotent.exe** de [Releases](https://github.com/kalyman1997/omnipotent/releases/tag/launcher-1.0.1).
+2. Abre el ejecutable. Detecta la instalación en las bibliotecas locales de Xbox, incluidas las rutas personalizadas de `.GamingRoot`. Respeta una carpeta guardada que siga siendo válida. Si encuentra varias instalaciones o ninguna, pulsa **Elegir carpeta** (cod25, Content o su carpeta superior).
 3. Pulsa **Instalar**. La primera instalación necesita internet y descarga aproximadamente 1 GB, menos si ya hay archivos válidos en el equipo.
 4. Cuando termine la verificación, pulsa **Play**.
 
@@ -29,7 +29,7 @@ El instalador no desactiva la seguridad de Windows ni modifica un servicio que a
 
 ## Desarrollo y publicación
 
-`Launcher.cs`, `Interface.cs` y `Bundle.cs` contienen la aplicación. `build.ps1` compila la variante para desarrollo. `Build-Share.ps1` compila el ejecutable único y exporta solamente los objetos originales verificados desde un almacén local; exige que el destino no exista. Los binarios grandes se alojan como assets de Releases, fuera del historial Git.
+`Launcher.cs`, `Interface.cs`, `Bundle.cs` y `GameDiscovery.cs` contienen la aplicación. La detección se ejecuta en segundo plano y solo lee carpetas; la compatibilidad exacta sigue comprobándose al instalar. `build.ps1` compila la variante para desarrollo. `Build-Client.ps1 -OutputPath <exe>` compila únicamente el cliente con el servidor configurado en `distribution.json`. La versión 1.0.1 reutiliza los objetos inmutables de `offline-1.0`. `Build-Share.ps1` compila el ejecutable único y exporta solamente los objetos originales verificados desde un almacén local; exige que el destino no exista. Los binarios grandes se alojan como assets de Releases, fuera del historial Git.
 
 `distribution.json` fija la release y su dirección HTTPS. Una versión nueva se prepara con un tag nuevo; no se sustituye silenciosamente el manifiesto instalado.
 
