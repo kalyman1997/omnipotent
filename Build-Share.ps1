@@ -8,7 +8,7 @@ $assets=Join-Path $out 'release-assets';$source=Join-Path $out 'repository'
 [IO.Directory]::CreateDirectory($assets)|Out-Null
 [IO.Directory]::CreateDirectory($source)|Out-Null
 $runtime=@('Hybrid.ps1','OfflinePackage.ps1','Branding.ps1','Portable.ps1','package.manifest.txt','compatibility.json','distribution.json','assets/umbral_ready_guard_post.lua')
-$code=@('Launcher.cs','Interface.cs','Bundle.cs','launcher.manifest','build.ps1','Build-Share.ps1','Publish-GitHub.ps1','LEEME.txt','README.md','RELEASE-NOTES.txt')
+$code=@('Launcher.cs','Interface.cs','Bundle.cs','launcher.manifest','build.ps1','Build-Share.ps1','Publish-GitHub.ps1','LEEME.txt','README.md','RELEASE-NOTES.txt','.gitattributes')
 foreach($name in @($runtime)+@($code)){
     $from=Join-Path $PSScriptRoot $name;$to=Join-Path $source $name
     [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($to))|Out-Null

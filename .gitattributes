@@ -1,0 +1,4 @@
+# These inputs are pinned by their exact SHA-256, including line endings.
+package.manifest.txt -text
+compatibility.json -text
+assets/umbral_ready_guard_post.lua -text
