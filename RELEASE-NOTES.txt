@@ -1,0 +1,9 @@
+Descarga únicamente **Omnipotent.exe**. Selecciona la carpeta del juego completo, pulsa **Instalar** y después **Play**. El resto de assets los descarga automáticamente el launcher (aproximadamente 1 GB).
+
+- Ejecutable único de 136 KB; motor incluido y datos locales por instalación.
+- Descargas HTTPS con tamaño y SHA-256 verificados.
+- Preparación de assets, perfil local propio y servicio del controlador firmado.
+- Comprobación de la build probada antes de modificar el juego.
+- Núcleo offline Kronos v1.36; interfaz y gestión de Omnipotent.
+
+**Prerelease para la primera prueba en otra PC.** La partida individual en Ashes of the Damned fue comprobada en la PC de referencia. La preparación portable pasó pruebas locales; aún falta confirmar una partida en la PC receptora. Requiere el juego completo compatible y permisos de administrador. No incluye partidas ni respaldos personales.

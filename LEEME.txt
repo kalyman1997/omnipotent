@@ -1,0 +1,31 @@
+OMNIPOTENT 1.0 — VERSION PARA COMPARTIR
+
+Descarga Omnipotent.exe de GitHub Releases. Este ejecutable incluye su motor:
+no tienes que copiar scripts, configuraciones ni la carpeta data de otra PC.
+
+1. Selecciona la carpeta del juego completo compatible.
+2. Pulsa Instalar y espera a que termine la descarga y verificacion.
+3. Pulsa Play.
+
+La primera instalacion requiere internet; descarga aproximadamente 1 GB.
+Se comprueban los assets originales, se guardan respaldos y se preparan el
+acceso a los datos del juego, el perfil local y el servicio del controlador
+firmado. El juego completo no se descarga. No se cambian las protecciones de
+Windows ni se reemplaza un servicio que pertenezca a otra instalacion.
+
+Los datos propios de esta PC quedan en %LOCALAPPDATA%\Omnipotent. Los respaldos
+se separan por carpeta de juego. No los borres. Cierra el juego antes del launcher.
+Si falta algo o hay una version incompatible, se informa antes de habilitar Play.
+
+Nucleo offline: Kronos v1.36. Interfaz, descarga, respaldos y preparacion: Omnipotent.
+El nombre en pantalla no implica que el nucleo sea una reimplementacion propia.
+
+Esta entrega es una prerelease: falta validar una partida en la PC receptora.
+La partida en solitario se comprobo previamente en la PC de referencia.
+
+Para Zombies: Ultimo jugado > Zombis > Seleccionar partida > Estandar > Individual
+> Ashes of the Damned > Listo. Si aparece Preparando Zombies, espera unos segundos
+en el menu inicial y vuelve a entrar.
+
+La variante de desarrollo Omnipotent.Launcher.exe conserva los scripts junto a
+ella y su almacen data existente. No es el archivo que se comparte con tu amigo.

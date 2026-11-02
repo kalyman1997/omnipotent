@@ -1,0 +1,6 @@
+data/
+settings.xml
+ultima-operacion.txt
+*.exe
+*.png
+release-assets/

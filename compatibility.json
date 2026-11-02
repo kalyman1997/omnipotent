@@ -1,0 +1,51 @@
+{
+  "Schema": 1,
+  "Label": "BO7 base verificada para Zombies / Ashes of the Damned",
+  "Files": [
+    {
+      "Path": "code_pre_gfx.ff",
+      "Length": 446564,
+      "Hash": "df858eca0762d528356362ef201f0745f53130e8d4d3f9d4b6b34e92ed136ded"
+    },
+    {
+      "Path": "code_pre_gfx.fp",
+      "Length": 171930,
+      "Hash": "1f6949256fb582dff1a54a60723c719b478f7501a129fadd58382bea4e664b00"
+    },
+    {
+      "Path": "code_post_gfx.ff",
+      "Length": 85286460,
+      "Hash": "c9baf0a18bae05f605bec7436cfd04729ac7d18b5ce8027ab6a6eaa9acdcf239"
+    },
+    {
+      "Path": "frontend_ui.ff",
+      "Length": 44852252,
+      "Hash": "1faa52f9994196e19838ca8ccb97c659265cf83daa44be91f89fed8bf2ff75b7"
+    },
+    {
+      "Path": "frontend_ui.fp",
+      "Length": 21281810,
+      "Hash": "f9055b533ddf14d9e39f809b5b061839f41332b8e902d9c762d8a5e7e4254b84"
+    },
+    {
+      "Path": "global.ff",
+      "Length": 47373628,
+      "Hash": "9e421bec65ba34470acf559a2ae1b3670976fd41cc5e2622bc2c2263ce00f419"
+    },
+    {
+      "Path": "global.fp",
+      "Length": 6087984,
+      "Hash": "d2cf71f2873f18bf757328b98aa39a53c988f80dcc9c2135dc5e316c22f50698"
+    },
+    {
+      "Path": "zm_sat_firefly.ff",
+      "Length": 127191352,
+      "Hash": "c84b71a1ce53076c032001829ed6f3f40ae9802d56e49867f2458dc8c23d673f"
+    },
+    {
+      "Path": "zm_sat_firefly.fp",
+      "Length": 53043739,
+      "Hash": "d24fadd6c150371d98faee811e23f290e03e42379670162434b5aef14114d94f"
+    }
+  ]
+}
