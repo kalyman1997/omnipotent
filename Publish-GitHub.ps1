@@ -67,7 +67,7 @@ try{
         $release=Api POST "repos/$repository/releases" @{tag_name=$tag;target_commitish='main';name='Omnipotent 1.0 - primera prueba en otra PC';body=$notes;draft=$true;prerelease=$true}
     }
     $remote=@{};$page=1
-    do{$batch=@(Api GET "repos/$repository/releases/$($release.id)/assets?per_page=100&page=$page");foreach($asset in $batch){$remote[$asset.name]=$asset};$page++}while($batch.Count-eq 100)
+    do{$batch=@(Api GET "repos/$repository/releases/$($release.id)/assets?per_page=100&page=$page" | Where-Object {$null-ne $_ -and $_.id});foreach($asset in $batch){$remote[$asset.name]=$asset};$page++}while($batch.Count-eq 100)
     $done=0
     foreach($asset in $inventory.assets){
         if($remote.ContainsKey($asset.name)){$uploaded=$remote[$asset.name]}
