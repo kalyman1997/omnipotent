@@ -83,7 +83,7 @@ namespace Umbral {
             }
         }
         static bool FocusExisting(){
-            string root=Path.Combine(Bundle.Home,"mods")+Path.DirectorySeparatorChar;
+            string root=Path.Combine(Bundle.Home,"mods",Convert.ToString(Configuration()["sha256"]))+Path.DirectorySeparatorChar;
             foreach(var process in Process.GetProcessesByName("BO7_Kronos_Trainer"))using(process){try{if(process.MainModule.FileName.StartsWith(root,StringComparison.OrdinalIgnoreCase)){ShowWindowAsync(process.MainWindowHandle,9);SetForegroundWindow(process.MainWindowHandle);return true;}}catch(System.ComponentModel.Win32Exception){}catch(InvalidOperationException){}}
             return false;
         }

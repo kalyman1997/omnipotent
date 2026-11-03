@@ -4,7 +4,7 @@ Launcher ligero para preparar y abrir el modo offline de una instalación compat
 
 ## Uso
 
-1. Descarga **Omnipotent.exe** de [Releases](https://github.com/kalyman1997/omnipotent/releases/tag/launcher-1.1.0).
+1. Descarga **Omnipotent.exe** de [Releases](https://github.com/kalyman1997/omnipotent/releases/tag/launcher-1.2.0).
 2. Abre el ejecutable. Detecta la instalación en las bibliotecas locales de Xbox, incluidas las rutas personalizadas de `.GamingRoot`. Respeta una carpeta guardada que siga siendo válida. Si encuentra varias instalaciones o ninguna, pulsa **Elegir carpeta** (cod25, Content o su carpeta superior).
 3. Pulsa **Instalar**. La primera instalación necesita internet y descarga aproximadamente 1 GB, menos si ya hay archivos válidos en el equipo.
 4. Cuando termine la verificación, pulsa **Play**.
@@ -15,9 +15,9 @@ No necesitas descargar manualmente los archivos con nombres largos de la release
 
 La pestaña **Mods** incluye **Abrir trainer**. El primer clic descarga el trainer de Zombies individual (aproximadamente 15 MB), comprueba SHA-256, prepara sus dependencias y abre su ventana. Las siguientes aperturas utilizan la copia local; no necesitan Python instalado ni otra descarga si la copia es válida. Un segundo clic enfoca la ventana existente.
 
-Antes de la primera partida con mods, utiliza **Preparar juego** dentro del trainer para instalar su script y reinicia el juego si ya estaba abierto. Abrir el trainer desde el launcher no instala el script ni activa opciones automáticamente. Conserva las funciones y límites del trainer v0.5 existente; esta actualización verifica su apertura, no todos sus efectos en partida.
+Antes de la primera partida con mods, utiliza **Preparar juego** dentro del trainer para instalar su script y reinicia el juego si ya estaba abierto. Abrir el trainer desde el launcher no instala el script ni activa opciones automáticamente. Incluye Give Weapon, Pack-a-Punch I/II/III y munición eléctrica, de hielo, fuego, explosiva y Brain Rot. Los efectos conservan su probabilidad y tiempos de recarga nativos. Las armas disponibles dependen del mapa. Se probaron entrega de Ray Gun y M15, tres niveles de Pack-a-Punch, asignación/retirada de los cinco efectos y una baja con Impacto eléctrico en Ashes of the Damned individual; no todas las armas, mapas o animaciones de efectos.
 
-La interfaz 1.1.0 es compacta: encabezado **omnipotent by kaly**, pestañas Juego y Mods, selector de carpeta, Instalar, Play y progreso.
+La interfaz 1.2.0 es compacta: encabezado **omnipotent by kaly**, pestañas Juego y Mods, selector de carpeta, Instalar, Play y progreso.
 
 ## Compatibilidad y estado
 
@@ -37,7 +37,7 @@ El instalador no desactiva la seguridad de Windows ni modifica un servicio que a
 
 ## Desarrollo y publicación
 
-`Launcher.cs`, `Interface.cs`, `Bundle.cs`, `GameDiscovery.cs` y `Trainer.cs` contienen la aplicación. La detección se ejecuta en segundo plano y solo lee carpetas; la compatibilidad exacta sigue comprobándose al instalar. `build.ps1` compila la variante para desarrollo. `Build-Client.ps1 -OutputPath <exe>` compila únicamente el cliente con el servidor configurado en `distribution.json`. La versión 1.1.0 reutiliza los objetos inmutables de `offline-1.0`; `trainer.json` fija el paquete del trainer alojado en `launcher-1.1.0`. Conservar ambas releases. `Build-Share.ps1` compila el ejecutable único y exporta solamente los objetos originales verificados desde un almacén local; exige que el destino no exista. Los binarios grandes se alojan como assets de Releases, fuera del historial Git.
+`Launcher.cs`, `Interface.cs`, `Bundle.cs`, `GameDiscovery.cs` y `Trainer.cs` contienen la aplicación. La detección se ejecuta en segundo plano y solo lee carpetas; la compatibilidad exacta sigue comprobándose al instalar. `build.ps1` compila la variante para desarrollo. `Build-Client.ps1 -OutputPath <exe>` compila únicamente el cliente con el servidor configurado en `distribution.json`. La versión 1.2.0 reutiliza los objetos inmutables de `offline-1.0`; `trainer.json` fija el paquete del trainer alojado en `launcher-1.2.0`. Conservar ambas releases. `Build-Share.ps1` compila el ejecutable único y exporta solamente los objetos originales verificados desde un almacén local; exige que el destino no exista. Los binarios grandes se alojan como assets de Releases, fuera del historial Git.
 
 `distribution.json` fija la release y su dirección HTTPS. Una versión nueva se prepara con un tag nuevo; no se sustituye silenciosamente el manifiesto instalado.
 
