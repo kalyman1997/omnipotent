@@ -1,7 +1,7 @@
 {
   "executable": "BO7_Kronos_Trainer.exe",
-  "url": "https://github.com/kalyman1997/omnipotent/releases/download/launcher-1.2.0/140d6301459f189bb0879a475aff79b9e1bd487c8540d142ce0d8fcdc1473409",
-  "sha256": "140d6301459f189bb0879a475aff79b9e1bd487c8540d142ce0d8fcdc1473409",
-  "bytes": 15273218,
-  "executableSha256": "df5ce40da3011978cf16d13c40df71375b3d150ff40e1a4eb9fe4a34e7045f81"
+  "url": "https://github.com/kalyman1997/omnipotent/releases/download/launcher-1.3.0/eec400ce1b0680a57fbe7f4fe4f828a92ede3de881464bcf2cf424003abe5db1",
+  "sha256": "eec400ce1b0680a57fbe7f4fe4f828a92ede3de881464bcf2cf424003abe5db1",
+  "bytes": 14909306,
+  "executableSha256": "6964856cce0d1b089617f988c62ac8eb0feaef2eabe7e00b1f116e5dd77f2268"
 }

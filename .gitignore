@@ -4,3 +4,9 @@ ultima-operacion.txt
 *.exe
 *.png
 release-assets/
+
+trainer/build/
+trainer/dist*/
+trainer/__pycache__/
+trainer/kronos/build/
+!trainer/resources/bo7_zombies_cover.png

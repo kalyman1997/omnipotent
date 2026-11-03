@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -12,9 +12,9 @@ using System.Xml;
 [assembly: System.Reflection.AssemblyTitle("Omnipotent 1.0")]
 [assembly: System.Reflection.AssemblyProduct("Omnipotent")]
 [assembly: System.Reflection.AssemblyDescription("Gestor híbrido: offline con Kronos y online desde Xbox")]
-[assembly: System.Reflection.AssemblyVersion("1.2.0.0")]
-[assembly: System.Reflection.AssemblyFileVersion("1.2.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersion("1.1.0")]
+[assembly: System.Reflection.AssemblyVersion("1.3.0.0")]
+[assembly: System.Reflection.AssemblyFileVersion("1.3.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersion("1.3.0")]
 
 namespace Umbral {
     internal sealed class EngineResult {

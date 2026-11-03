@@ -1,4 +1,4 @@
-﻿param([Parameter(Mandatory=$true)][string]$PackagePath,[ValidateSet('Inspect','Stage','Publish')][string]$Mode='Inspect')
+﻿param([Parameter(Mandatory=$true)][string]$PackagePath,[ValidateSet('Inspect','Stage','Publish')][string]$Mode='Inspect',[string]$RepositoryPath)
 $ErrorActionPreference='Stop'
 $package=[IO.Path]::GetFullPath($PackagePath)
 $inventory=Get-Content -LiteralPath (Join-Path $package 'release-inventory.json') -Raw|ConvertFrom-Json
@@ -41,7 +41,7 @@ try{
     }
     if($repo.private){throw 'El repositorio es privado. No se cambia su visibilidad automaticamente.'}
     if($Mode-eq 'Stage'){
-        $source=Join-Path $package 'repository'
+        $source=if($RepositoryPath){[IO.Path]::GetFullPath($RepositoryPath)}else{Join-Path $package 'repository'}
         $gitArgs=@('-c',('safe.directory='+$source.Replace('\','/')),'-C',$source)
         if(!(Test-Path -LiteralPath (Join-Path $source '.git'))){
             & git @gitArgs init --initial-branch=main|Out-Null;if($LASTEXITCODE-ne 0){throw 'git init fallo.'}

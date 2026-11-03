@@ -1,16 +1,16 @@
-omnipotent by kaly — 1.2.0
+# omnipotent by kaly — 1.3.0
 
-Descarga Omnipotent.exe y abre Mods > Abrir trainer.
-Antes de la primera partida tras actualizar: cierra BO7, pulsa Preparar juego en el trainer y vuelve a iniciar BO7 desde Omnipotent.
+Descarga **Omnipotent.exe**. En **Mods > Abrir trainer** se descarga el trainer 1.3.0 con verificación SHA-256.
+Con el juego cerrado, pulsa **Preparar juego** en el trainer para actualizar el script. Después inicia el juego y conecta el trainer.
 
-Nuevo en Armas:
-- Give Weapon con selector, catálogo de la partida e identificador manual.
-- Pack-a-Punch nivel I, II y III para el arma actual.
-- Electricidad, hielo, fuego, explosiones y Brain Rot; opción para quitar el modificador.
-- Confirmación del arma, nivel y efecto reales del juego.
+- Jetpack con impulso vertical y movimiento lateral mediante los controles de movimiento.
+- Give Weapon: admite las ocho armas especiales reconocidas por el motor fuera del catálogo del mapa, confirma equipamiento y sustituye el arma equipada cuando el inventario está lleno.
+- Game Speed: cambia la velocidad real, confirma la transición y restaura la velocidad anterior al apagarlo.
+- Terminar ronda: elimina enemigos de la ronda y confirma el avance normal sin seguir matando en la siguiente.
+- Las acciones completadas no se vuelven a ejecutar al cambiar de mapa.
 
-Prueba en Ashes of the Damned individual: Ray Gun y M15 entregados/equipados, Pack-a-Punch I/II/III, cinco efectos asignados y retirada confirmada. Impacto eléctrico observado al disparar. Los otros efectos no se comprobaron visualmente uno por uno. 30 pruebas del protocolo superadas y script compilado/verificado.
+Validación: 34 pruebas automatizadas; compilación y validación estática del script. Las ocho armas se entregaron y equiparon en Ashes y Astra. Terminar ronda avanzó de 1 a 2 en ambos, con enemigos de la nueva ronda vivos. Velocidad medida a 0.5×, 2×, 1.1× y 1.2×; restauración a 1×. God Mode mantuvo salud 150. El usuario confirmó el vuelo vertical; la dirección lateral está implementada pero aún no tiene prueba de movimiento en partida registrada.
 
-Los efectos usan probabilidad y recarga nativas; no se activan en cada bala. La disponibilidad de armas depende del mapa. No se promete compatibilidad universal ni una primera partida en otra PC ya verificada.
+No se comprobaron todos los ataques/efectos de todas las armas en todos los mapas. Primera partida en otra PC pendiente; sigue siendo prerelease. Requiere juego completo compatible. El núcleo offline sigue siendo Kronos 1.36. No se repitió una prueba con Internet físicamente desconectado en esta actualización.
 
-Se mantiene el núcleo offline Kronos v1.36 y los archivos de offline-1.0. Esta entrega actualiza launcher/trainer y no reemplaza ese núcleo.
+El launcher anterior no se actualiza solo: descarga este Omnipotent.exe para recibir el trainer nuevo. Se conservan los datos locales y las releases anteriores.
